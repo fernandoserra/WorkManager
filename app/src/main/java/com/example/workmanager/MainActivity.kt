@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             WorkManagerTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("WorkManager")
+                    Greeting("WorkManager...")
                 }
             }
             myWorkManager()
