@@ -6,6 +6,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.CountDownTimer
+import android.os.Handler
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -15,16 +17,45 @@ import androidx.work.WorkerParameters
 class MyWorkerManager(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters) {
 
+
+   // val handler= Handler()
+
     companion object {
         const val CHANNEL_ID = "channel_id"
         const val NOTIFICATION_ID = 1
+        const val TAG= "MyWorkerManager"
     }
 
     override fun doWork(): Result {
         Log.d("success",
             "doWork: Success function called")
-        showNotification()
+
+        //showNotification()
+
+        dummyTime()
+       // startTimeCounter()
+
         return Result.success()
+    }
+
+    private fun dummyTime() {
+        for(num in 1 ..100){
+            Log.d(TAG, "dummyTime: $num ")
+            Thread.sleep(1000)
+        }
+    }
+
+    fun startTimeCounter() {
+        var counter = 0
+        object : CountDownTimer(50000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                Log.d(TAG, "counter: $counter ")
+                counter++
+            }
+            override fun onFinish() {
+                Log.d(TAG, "FINALIZADO ")
+            }
+        }.start()
     }
 
 
